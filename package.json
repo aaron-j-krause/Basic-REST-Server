@@ -1,0 +1,24 @@
+{
+  "name": "basic_rest",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "chai-http": "^1.0.0",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-jscs": "^1.5.0",
+    "grunt-simple-mocha": "^0.4.0",
+    "jscs": "^1.11.2",
+    "jshint": "^2.6.0",
+    "mocha": "^2.1.0",
+    "q": "^1.1.2"
+  }
+}
