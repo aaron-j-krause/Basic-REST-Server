@@ -12,11 +12,11 @@ describe('REST tests', function(){
   beforeEach(function(){
     var file = JSON.stringify({firstName:'Randy', lastName:'Savage', snapsInto:'Slim Jim'});
     fs.writeFileSync('./data/testFile.json', file, 'utf-8');
-  })
+  });
   after(function(){
     fs.unlinkSync('./data/testFile.json');
-    fs.unlinkSync('./data/' + count + '.json')
-  })
+    fs.unlinkSync('./data/' + count + '.json');
+  });
   it('should get a directory for GET', function(done){
     chai.request(server)
       .get('/user')
@@ -24,9 +24,9 @@ describe('REST tests', function(){
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
         expect(res.text).to.contain('files');
-        done()
-      })
-  })
+        done();
+      });
+  });
   it('should get single file for GET with param', function(done){
     chai.request(server)
       .get('/user/testFile')
@@ -35,19 +35,20 @@ describe('REST tests', function(){
         expect(res).to.have.status(200);
         expect(res.text).to.contain('Slim Jim');
         done();
-      })
-  })
+      });
+  });
   it('should modify test file for PATCH', function(done){
     chai.request(server)
       .patch('/user/testFile')
-      .send({oh:'YEAH'})
+      .send({firstName:'Randall', oh:'YEAH'})
       .end(function(err, res){
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
-        expect(fs.readFileSync('./data/testFile.json', 'utf8')).to.contain('YEAH')
+        expect(fs.readFileSync('./data/testFile.json', 'utf8')).to.contain('YEAH');
+        expect(fs.readFileSync('./data/testFile.json', 'utf8')).to.not.contain('Randy');        
         done();
       });
-  })
+  });
   it('should replace test file for PUT', function(done){
     chai.request(server)
       .put('/user/testFile')
@@ -57,8 +58,8 @@ describe('REST tests', function(){
         expect(res).to.have.status(200);
         expect(fs.readFileSync('./data/testFile.json', 'utf8')).to.contain('machomanrandysavage');
         done();
-      })
-  })
+      });
+  });
   it('should create a new file for POST', function(done){
     chai.request(server)
       .post('/user')
@@ -66,8 +67,8 @@ describe('REST tests', function(){
       .end(function(err, res){
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
-        expect(fs.readFileSync('./data/' + count + '.json', 'utf8')).to.contain('Camel Clutch')
+        expect(fs.readFileSync('./data/' + count + '.json', 'utf8')).to.contain('Camel Clutch');
         done();
-      })
-  })
-})
+      });
+  });
+});
